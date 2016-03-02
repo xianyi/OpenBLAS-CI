@@ -1,0 +1,17 @@
+*.obj
+*.lib
+*.dll
+*.dylib
+*.def
+*.o
+*.out
+*.so
+*.so.*
+*.a
+.svn
+*~
+lib.grd
+nohup.out
+build
+build.*
+*.swp
