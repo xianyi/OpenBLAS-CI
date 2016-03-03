@@ -1,5 +1,5 @@
 #!/bin/bash
-
+set -e
 script_name=$1
 build_arg=$2
 

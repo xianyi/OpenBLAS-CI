@@ -1,6 +1,6 @@
 #!/bin/bash
 #    docker run --rm -v $PWD:/io quay.io/pypa/manylinux1_x86_64 /io/full_test_linux.sh ${build_string}
-
+set -e
 git clone https://github.com/xianyi/OpenBLAS
 cd OpenBLAS
 BTYPE=$1
