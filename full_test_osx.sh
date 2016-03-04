@@ -1,13 +1,21 @@
 #!/bin/bash
-#    docker run --rm -v $PWD:/io quay.io/pypa/manylinux1_x86_64 /io/quick_test_linux.sh ${build_string}
+# ./full_test_osx.sh ${build_string} ${CORETYPE}
 set -e
-git clone https://github.com/xianyi/OpenBLAS
-cd OpenBLAS
+
 BTYPE=$1
+CORETYPE=$2
+ROOTDIR=$PWD
+
 echo $BTYPE
+echo $CORETYPE
+
+cd OpenBLAS
+git clean -fxd
 make QUIET_MAKE=1 NUM_THREADS=64 $BTYPE
+export OPENBLAS_CORETYPE=$CORETYPE
 make -C test NUM_THREADS=64 $BTYPE
 make -C ctest NUM_THREADS=64 $BTYPE
 make -C utest NUM_THREADS=64 $BTYPE
-make NUM_THREADS=64 $BTYPE install
+make NUM_THREADS=64 $BTYPE lapack-test
+
 echo "Finish"
