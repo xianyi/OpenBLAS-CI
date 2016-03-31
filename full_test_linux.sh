@@ -38,7 +38,7 @@ function np_test {
         sys.exit(not result.wasSuccessful())"
 }
 
-np_test numpy '"full", verbosity=3'
-np_test scipy '"full", verbosity=3'
+np_test numpy '"full", verbose=3'
+np_test scipy '"full", verbose=3'
 nosetests sklearn
 echo "Finish"
