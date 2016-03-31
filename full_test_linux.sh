@@ -21,12 +21,24 @@ cd bin
 echo "Running BLAS-Tester"
 /io/run_blas_tester.sh
 
-# Run python test
+# Run python tests
 export PATH=/opt/2.7/bin:$PATH
 export LD_LIBRARY_PATH=/usr/local/lib:$LD_LIBRARY_PATH
-MANYLINUX_URL=https://nipy.bic.berkeley.edu/manylinux
-pip install -f $MANYLINUX_URL "cython==0.22.1" nose
+pip install "cython==0.23.5" nose
 pip install "numpy==1.10.4"
 pip install "scipy==0.17.0"
-python -c 'import scipy.linalg; scipy.linalg.test()'
+pip install "scikit-learn==0.17.1"
+
+function np_test {
+    local pkg_name=$1
+    local extra_args=$2
+    python -c "import sys; \
+        import $pkg_name; \
+        result = $pkg_name.test($extra_args); \
+        sys.exit(not result.wasSuccessful())"
+}
+
+np_test numpy '"full", verbosity=3'
+np_test scipy '"full", verbosity=3'
+nosetests sklearn
 echo "Finish"
