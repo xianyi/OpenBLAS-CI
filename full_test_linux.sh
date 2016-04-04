@@ -1,5 +1,6 @@
 #!/bin/bash
-#    docker run --rm -v $PWD:/io quay.io/pypa/manylinux1_x86_64 /io/full_test_linux.sh ${build_string}
+# docker build -t xianyi/openblas-ci .
+# docker run --rm -v $PWD:/io xianyi/openblas-ci /io/${script_name} "${build_arg}"
 set -e
 git clone https://github.com/xianyi/OpenBLAS
 git clone https://github.com/xianyi/BLAS-Tester
@@ -22,7 +23,6 @@ echo "Running BLAS-Tester"
 /io/run_blas_tester.sh
 
 # Run python tests
-export PATH=/opt/2.7/bin:$PATH
 export LD_LIBRARY_PATH=/usr/local/lib:$LD_LIBRARY_PATH
 pip install "cython==0.23.5" nose
 pip install "numpy==1.10.4"
