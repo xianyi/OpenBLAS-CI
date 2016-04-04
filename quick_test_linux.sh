@@ -1,5 +1,6 @@
 #!/bin/bash
-#    docker run --rm -v $PWD:/io quay.io/pypa/manylinux1_x86_64 /io/quick_test_linux.sh ${build_string}
+# docker build -t xianyi/openblas-ci .
+# docker run --rm -v $PWD:/io xianyi/openblas-ci /io/${script_name} "${build_arg}"
 set -e
 git clone https://github.com/xianyi/OpenBLAS
 cd OpenBLAS
