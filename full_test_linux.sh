@@ -38,6 +38,10 @@ function np_test {
         sys.exit(not result.wasSuccessful())"
 }
 
+# Workaround for f2py install issue:
+echo -e '#!/usr/bin/python\nfrom numpy import f2py\nf2py.main()' > /usr/bin/f2py
+chmod +x /usr/bin/f2py
+
 np_test numpy '"full", verbose=3'
 np_test scipy '"full", verbose=3'
 nosetests sklearn
