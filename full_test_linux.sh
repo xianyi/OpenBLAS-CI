@@ -25,9 +25,9 @@ echo "Running BLAS-Tester"
 # Run python tests
 export LD_LIBRARY_PATH=/usr/local/lib:$LD_LIBRARY_PATH
 pip install "cython==0.23.5" nose
-pip install "numpy==1.10.4"
-pip install "scipy==0.17.0"
-pip install "scikit-learn==0.17.1"
+pip install --no-binary=:all: "numpy==1.10.4"
+pip install --no-binary=:all: "scipy==0.17.0"
+pip install --no-binary=:all: "scikit-learn==0.17.1"
 
 function np_test {
     local pkg_name=$1
@@ -39,7 +39,7 @@ function np_test {
 }
 
 # Workaround for f2py install issue:
-echo -e '#!/usr/local/bin/python\nfrom numpy import f2py\nf2py.main()' > /usr/bin/f2py
+echo -e '#!/usr/bin/env python\nfrom numpy import f2py\nf2py.main()' > /usr/bin/f2py
 chmod +x /usr/bin/f2py
 
 np_test numpy '"full", verbose=3'
