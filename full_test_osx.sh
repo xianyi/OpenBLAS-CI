@@ -1,6 +1,6 @@
 #!/bin/bash
 # ./full_test_osx.sh ${build_string} ${CORETYPE}
-set -e
+set -ex
 
 BTYPE=$1
 CORETYPE=$2
