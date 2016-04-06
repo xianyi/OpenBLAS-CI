@@ -6,7 +6,7 @@ BTYPE=$1
 CORETYPE=$2
 echo $BTYPE
 echo $CORETYPE
-git clean -fxd
+git clean -qfxd
 make QUIET_MAKE=1 NUM_THREADS=64 $BTYPE
 export OPENBLAS_CORETYPE=$CORETYPE
 make -C test NUM_THREADS=64 $BTYPE
