@@ -42,7 +42,7 @@ function np_test {
 echo -e '#!/usr/bin/env python\nfrom numpy import f2py\nf2py.main()' > /usr/bin/f2py
 chmod +x /usr/bin/f2py
 
-np_test numpy '"full", verbose=3'
-np_test scipy '"full", verbose=3'
+np_test numpy '"full"'
+np_test scipy '"full"'
 nosetests sklearn
 echo "Finish"
