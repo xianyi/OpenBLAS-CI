@@ -17,9 +17,9 @@ make -C test NUM_THREADS=64 $BTYPE
 make -C ctest NUM_THREADS=64 $BTYPE
 make -C utest NUM_THREADS=64 $BTYPE
 make NUM_THREADS=64 $BTYPE lapack-test
-mkdir -p $HOME/opt
-make NUM_THREADS=64 $BTYPE PREFIX=$HOME/opt/OpenBLAS install
-export LD_LIBRARY_PATH=$HOME/opt/OpenBLAS/lib:$LD_LIBRARY_PATH
+mkdir -p $ROOTDIR/opt
+make NUM_THREADS=64 $BTYPE PREFIX=$ROOTDIR/opt/OpenBLAS install
+export LD_LIBRARY_PATH=$ROOTDIR/opt/OpenBLAS/lib:$LD_LIBRARY_PATH
 
 # Run python tests
 cd $HOME
@@ -30,8 +30,8 @@ source $VENV/bin/activate
 
 cat << EOF > $HOME/site.cfg
 [openblas]
-library_dirs = $HOME/opt/OpenBLAS/lib
-include_dirs = $HOME/opt/OpenBLAS/include
+library_dirs = $ROOTDIR/opt/OpenBLAS/lib
+include_dirs = $ROOTDIR/opt/OpenBLAS/include
 EOF
 pip install "cython==0.23.5" nose
 pip install --no-binary=:all: "numpy==1.10.4"
