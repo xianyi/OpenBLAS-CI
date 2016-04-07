@@ -1,0 +1,55 @@
+diff --git a/sklearn/feature_extraction/tests/test_image.py b/sklearn/feature_extraction/tests/test_image.py
+index 1c2e603..0df9c81 100644
+--- a/sklearn/feature_extraction/tests/test_image.py
++++ b/sklearn/feature_extraction/tests/test_image.py
+@@ -183,7 +183,7 @@ def test_reconstruct_patches_perfect():
+
+     patches = extract_patches_2d(face, (p_h, p_w))
+     face_reconstructed = reconstruct_from_patches_2d(patches, face.shape)
+-    np.testing.assert_array_equal(face, face_reconstructed)
++    np.testing.assert_array_almost_equal(face, face_reconstructed)
+
+
+ def test_reconstruct_patches_perfect_color():
+@@ -192,7 +192,7 @@ def test_reconstruct_patches_perfect_color():
+
+     patches = extract_patches_2d(face, (p_h, p_w))
+     face_reconstructed = reconstruct_from_patches_2d(patches, face.shape)
+-    np.testing.assert_array_equal(face, face_reconstructed)
++    np.testing.assert_array_almost_equal(face, face_reconstructed)
+
+
+ def test_patch_extractor_fit():
+diff --git a/sklearn/utils/estimator_checks.py b/sklearn/utils/estimator_checks.py
+index 702aeff..35d2f69 100644
+--- a/sklearn/utils/estimator_checks.py
++++ b/sklearn/utils/estimator_checks.py
+@@ -26,6 +26,7 @@ from sklearn.utils.testing import assert_warns_message
+ from sklearn.utils.testing import META_ESTIMATORS
+ from sklearn.utils.testing import set_random_state
+ from sklearn.utils.testing import assert_greater
++from sklearn.utils.testing import assert_greater_equal
+ from sklearn.utils.testing import SkipTest
+ from sklearn.utils.testing import ignore_warnings
+ from sklearn.utils.testing import assert_warns
+@@ -1453,7 +1454,7 @@ def check_non_transformer_estimators_n_iter(name, estimator,
+         estimator.fit(X)
+     else:
+         estimator.fit(X, y_)
+-    assert_greater(estimator.n_iter_, 0)
++    assert_greater_equal(estimator.n_iter_, 1)
+
+
+ def check_transformer_n_iter(name, estimator):
+@@ -1472,9 +1473,9 @@ def check_transformer_n_iter(name, estimator):
+     # These return a n_iter per component.
+     if name in CROSS_DECOMPOSITION:
+         for iter_ in estimator.n_iter_:
+-            assert_greater(iter_, 1)
++            assert_greater_equal(iter_, 1)
+     else:
+-        assert_greater(estimator.n_iter_, 1)
++        assert_greater_equal(estimator.n_iter_, 1)
+
+
+ def check_get_params_invariance(name, estimator):

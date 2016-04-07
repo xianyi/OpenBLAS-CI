@@ -29,6 +29,12 @@ pip install --no-binary=:all: "numpy==1.10.4"
 pip install --no-binary=:all: "scipy==0.17.0"
 pip install --no-binary=:all: "scikit-learn==0.17.1"
 
+# Patch scikit-learn tests that are too sensitive as backport of:
+# https://github.com/scikit-learn/scikit-learn/pull/6634
+cd /usr/local/lib/python2.7/site-packages
+patch -p1 < /io/scikit-learn-0.17.1-fix-tests.diff
+cd $HOME
+
 function np_test {
     local pkg_name=$1
     local extra_args=$2
