@@ -6,5 +6,6 @@ build_arg=$2
 echo ${script_name}
 echo ${build_arg}
 
-docker build -t xianyi/openblas-ci .
+#docker build -t xianyi/openblas-ci .
+docker pull xianyi/openblas-ci
 docker run --rm -v $PWD:/io xianyi/openblas-ci /io/${script_name} "${build_arg}"
