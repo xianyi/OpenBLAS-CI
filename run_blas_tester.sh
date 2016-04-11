@@ -1,4 +1,5 @@
 #!/bin/bash
+set -e
 today=`date +%y%m%d`
 
 ####test level1 ####
